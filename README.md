@@ -14,22 +14,22 @@ Funcionalidades do Spotfei:
 • Listar informações de músicas buscadas
 • Curtir e descurtir músicas
 
-• Gerenciar playlists:
+• Gerenciar playlists:{
 • Criar, editar, excluir playlists
-• Adicionar/remover músicas de playlists
+• Adicionar/remover músicas de playlists}
 
-• Visualizar histórico:
+• Visualizar histórico:{
 • Visualizar últimas 10 músicas buscadas
 • Visualizar lista de músicas curtidas
-• Visualizar lista de músicas descurtidas
+• Visualizar lista de músicas descurtidas}
 
-• Login como administrador
+• Login como administrador:{
 • Cadastrar e excluir músicas
 • Cadastrar artistas
-• Consultar usuários
+• Consultar usuários}
 
-• Visualizar estatísticas do sistema:
+• Visualizar estatísticas do sistema:{
 • Top 5 músicas mais curtidas pelos usuários
 • Top 5 músicas mais descurtidas pelos usuários
 • Total de usuários
-• Total de músicas
+• Total de músicas}
