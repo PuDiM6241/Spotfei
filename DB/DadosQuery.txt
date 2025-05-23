@@ -1,0 +1,96 @@
+--Artistas pessoas
+INSERT INTO person (name, age, username, pass) VALUES
+('Till Lindemann', 62, 'Rammstein', 'Til123'),
+('Michael Stipe', 65, 'REM', 'Mic123'),
+('Alex Turner', 39, 'Arctic Monkeys', 'Ale123'),
+('Damon Albarn', 57, 'Gorillaz', 'Dam123');
+
+--Artistas (referenciando pessoas)
+INSERT INTO artist (id, genre) VALUES
+((SELECT id FROM person WHERE username='Rammstein'), 'Industrial Metal'),
+((SELECT id FROM person WHERE username='REM'), 'Alternative Rock'),
+((SELECT id FROM person WHERE username='Arctic Monkeys'), 'Indie Rock'),
+((SELECT id FROM person WHERE username='Gorillaz'), 'Alternative Hip Hop');
+
+--Músicas de Rammstein
+INSERT INTO music (name, artistId, genre) VALUES
+('Du Hast', (SELECT id FROM person WHERE username='Rammstein'), 'Industrial Metal'),
+('Sonne', (SELECT id FROM person WHERE username='Rammstein'), 'Industrial Metal'),
+('Ich Will', (SELECT id FROM person WHERE username='Rammstein'), 'Industrial Metal'),
+('Engel', (SELECT id FROM person WHERE username='Rammstein'), 'Industrial Metal'),
+('Feuer Frei!', (SELECT id FROM person WHERE username='Rammstein'), 'Industrial Metal');
+
+--Músicas de REM
+INSERT INTO music (name, artistId, genre) VALUES
+('Losing My Religion', (SELECT id FROM person WHERE username='REM'), 'Alternative Rock'),
+('Everybody Hurts', (SELECT id FROM person WHERE username='REM'), 'Alternative Rock'),
+('Man on the Moon', (SELECT id FROM person WHERE username='REM'), 'Alternative Rock'),
+('The One I Love', (SELECT id FROM person WHERE username='REM'), 'Alternative Rock'),
+('Nightswimming', (SELECT id FROM person WHERE username='REM'), 'Alternative Rock');
+
+--Músicas de Arctic Monkeys
+INSERT INTO music (name, artistId, genre) VALUES
+('Do I Wanna Know?', (SELECT id FROM person WHERE username='Arctic Monkeys'), 'Indie Rock'),
+('R U Mine?', (SELECT id FROM person WHERE username='Arctic Monkeys'), 'Indie Rock'),
+('Fluorescent Adolescent', (SELECT id FROM person WHERE username='Arctic Monkeys'), 'Indie Rock'),
+('Why''d You Only Call Me When You''re High?', (SELECT id FROM person WHERE username='Arctic Monkeys'), 'Indie Rock'),
+('I Bet You Look Good on the Dancefloor', (SELECT id FROM person WHERE username='Arctic Monkeys'), 'Indie Rock');
+
+--Músicas de Gorillaz
+INSERT INTO music (name, artistId, genre) VALUES
+('Clint Eastwood', (SELECT id FROM person WHERE username='Gorillaz'), 'Alternative Hip Hop'),
+('Feel Good Inc.', (SELECT id FROM person WHERE username='Gorillaz'), 'Alternative Hip Hop'),
+('DARE', (SELECT id FROM person WHERE username='Gorillaz'), 'Alternative Hip Hop'),
+('On Melancholy Hill', (SELECT id FROM person WHERE username='Gorillaz'), 'Alternative Hip Hop'),
+('Stylo', (SELECT id FROM person WHERE username='Gorillaz'), 'Alternative Hip Hop');
+
+--Álbuns (ownerId = artistaId)
+INSERT INTO album (ownerId, name) VALUES
+-- Rammstein
+((SELECT id FROM person WHERE username='Rammstein'), 'Mutter'),
+((SELECT id FROM person WHERE username='Rammstein'), 'Sehnsucht'),
+-- REM
+((SELECT id FROM person WHERE username='REM'), 'Automatic for the People'),
+((SELECT id FROM person WHERE username='REM'), 'Document'),
+((SELECT id FROM person WHERE username='REM'), 'Out of Time'),
+-- Arctic Monkeys
+((SELECT id FROM person WHERE username='Arctic Monkeys'), 'AM'),
+((SELECT id FROM person WHERE username='Arctic Monkeys'), 'Favourite Worst Nightmare'),
+((SELECT id FROM person WHERE username='Arctic Monkeys'), 'Whatever People Say I Am, That''s What I''m Not'),
+-- Gorillaz
+((SELECT id FROM person WHERE username='Gorillaz'), 'Gorillaz'),
+((SELECT id FROM person WHERE username='Gorillaz'), 'Plastic Beach'),
+((SELECT id FROM person WHERE username='Gorillaz'), 'Demon Days');
+
+-- Relacões albumMusic
+-- Rammstein
+INSERT INTO albumMusic (albumId, musicId) VALUES
+((SELECT id FROM album WHERE name='Sehnsucht'), (SELECT id FROM music WHERE name = 'Du Hast')),
+((SELECT id FROM album WHERE name='Mutter'), (SELECT id FROM music WHERE name = 'Sonne')),
+((SELECT id FROM album WHERE name='Mutter'), (SELECT id FROM music WHERE name = 'Ich Will')),
+((SELECT id FROM album WHERE name='Sehnsucht'), (SELECT id FROM music WHERE name = 'Engel')),
+((SELECT id FROM album WHERE name='Mutter'), (SELECT id FROM music WHERE name = 'Feuer Frei!'));
+
+-- REM
+INSERT INTO albumMusic (albumId, musicId) VALUES
+((SELECT id FROM album WHERE name='Out of Time'), (SELECT id FROM music WHERE name = 'Losing My Religion')),
+((SELECT id FROM album WHERE name='Automatic for the People'), (SELECT id FROM music WHERE name = 'Everybody Hurts')),
+((SELECT id FROM album WHERE name='Automatic for the People'), (SELECT id FROM music WHERE name = 'Man on the Moon')),
+((SELECT id FROM album WHERE name='Document'), (SELECT id FROM music WHERE name = 'The One I Love')),
+((SELECT id FROM album WHERE name='Automatic for the People'), (SELECT id FROM music WHERE name = 'Nightswimming'));
+
+-- Arctic Monkeys
+INSERT INTO albumMusic (albumId, musicId) VALUES
+((SELECT id FROM album WHERE name='AM'), (SELECT id FROM music WHERE name = 'Do I Wanna Know?')),
+((SELECT id FROM album WHERE name='AM'), (SELECT id FROM music WHERE name = 'R U Mine?')),
+((SELECT id FROM album WHERE name='Favourite Worst Nightmare'), (SELECT id FROM music WHERE name = 'Fluorescent Adolescent')),
+((SELECT id FROM album WHERE name='AM'), (SELECT id FROM music WHERE name = 'Why''d You Only Call Me When You''re High?')),
+((SELECT id FROM album WHERE name='Whatever People Say I Am, That''s What I''m Not'), (SELECT id FROM music WHERE name = 'I Bet You Look Good on the Dancefloor'));
+
+-- Gorillaz
+INSERT INTO albumMusic (albumId, musicId) VALUES
+((SELECT id FROM album WHERE name='Gorillaz'), (SELECT id FROM music WHERE name = 'Clint Eastwood')),
+((SELECT id FROM album WHERE name='Demon Days'), (SELECT id FROM music WHERE name = 'Feel Good Inc.')),
+((SELECT id FROM album WHERE name='Demon Days'), (SELECT id FROM music WHERE name = 'DARE')),
+((SELECT id FROM album WHERE name='Plastic Beach'), (SELECT id FROM music WHERE name = 'On Melancholy Hill')),
+((SELECT id FROM album WHERE name='Plastic Beach'), (SELECT id FROM music WHERE name = 'Stylo'));
