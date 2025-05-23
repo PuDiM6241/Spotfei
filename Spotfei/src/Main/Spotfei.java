@@ -4,7 +4,6 @@
  */
 package Main;
 
-import Controler.CUser;
 import View.VLogin;
 
 /**
@@ -17,9 +16,8 @@ public class Spotfei {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        CUser cUser = new CUser();
-        VLogin vLogin = new VLogin(cUser.getCLogin());
-        vLogin.setVisible(true);
+        VLogin vL = new VLogin();
+        vL.setVisible(true);
     }
     
 }

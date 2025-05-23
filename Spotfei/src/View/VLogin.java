@@ -5,6 +5,9 @@
 package View;
 
 import Controler.CLogin;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -12,14 +15,89 @@ import Controler.CLogin;
  */
 public class VLogin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VLogin
-     */
-    public VLogin(CLogin c){
+    public VLogin(){
         initComponents();
-        this.c = c;
-        this.c.setV(this);
-        lblMensagem.setVisible(false);
+        c = new CLogin(this);
+    }
+
+    public JButton getBtRegister() {
+        return btRegister;
+    }
+
+    public void setBtRegister(JButton btRegister) {
+        this.btRegister = btRegister;
+    }
+
+    public JButton getBtSubmit() {
+        return btSubmit;
+    }
+
+    public void setBtSubmit(JButton btSubmit) {
+        this.btSubmit = btSubmit;
+    }
+
+    public JLabel getLblLogin() {
+        return lblLogin;
+    }
+
+    public void setLblLogin(JLabel lblLogin) {
+        this.lblLogin = lblLogin;
+    }
+
+    public JLabel getLblPassword() {
+        return lblPassword;
+    }
+
+    public void setLblPassword(JLabel lblPassword) {
+        this.lblPassword = lblPassword;
+    }
+
+    public JLabel getLblRegister() {
+        return lblRegister;
+    }
+
+    public void setLblRegister(JLabel lblRegister) {
+        this.lblRegister = lblRegister;
+    }
+
+    public JLabel getLblSpotfei() {
+        return lblSpotfei;
+    }
+
+    public void setLblSpotfei(JLabel lblSpotfei) {
+        this.lblSpotfei = lblSpotfei;
+    }
+
+    public JLabel getLblStatus() {
+        return lblStatus;
+    }
+
+    public void setLblStatus(JLabel lblStatus) {
+        this.lblStatus = lblStatus;
+    }
+
+    public JLabel getLblUsername() {
+        return lblUsername;
+    }
+
+    public void setLblUsername(JLabel lblUsername) {
+        this.lblUsername = lblUsername;
+    }
+
+    public JTextField getTxtPassword() {
+        return txtPassword;
+    }
+
+    public void setTxtPassword(JTextField txtPassword) {
+        this.txtPassword = txtPassword;
+    }
+
+    public JTextField getTxtUsername() {
+        return txtUsername;
+    }
+
+    public void setTxtUsername(JTextField txtUsername) {
+        this.txtUsername = txtUsername;
     }
 
     /**
@@ -36,8 +114,11 @@ public class VLogin extends javax.swing.JFrame {
         btSubmit = new javax.swing.JButton();
         lblUsername = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
+        lblLogin = new javax.swing.JLabel();
+        lblRegister = new javax.swing.JLabel();
         lblSpotfei = new javax.swing.JLabel();
-        lblMensagem = new javax.swing.JLabel();
+        btRegister = new javax.swing.JButton();
+        lblStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 102));
@@ -45,17 +126,27 @@ public class VLogin extends javax.swing.JFrame {
 
         txtPassword.setToolTipText("Password");
 
-        btSubmit.setText("Submit");
+        btSubmit.setText("Confirmar");
         btSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSubmitActionPerformed(evt);
             }
         });
 
-        lblUsername.setText("Username");
+        lblUsername.setText("Nome de usuário");
 
         lblPassword.setBackground(new java.awt.Color(255, 255, 255));
-        lblPassword.setText("Password");
+        lblPassword.setText("senha");
+
+        lblLogin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLogin.setText("Login");
+        lblLogin.setToolTipText("");
+        lblLogin.setAlignmentX(0.5F);
+        lblLogin.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        lblRegister.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRegister.setText("Não tem cadastro?");
 
         lblSpotfei.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblSpotfei.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -63,8 +154,14 @@ public class VLogin extends javax.swing.JFrame {
         lblSpotfei.setToolTipText("");
         lblSpotfei.setAlignmentX(0.5F);
 
-        lblMensagem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblMensagem.setText("mensagem de erro");
+        btRegister.setText("Cadastre-se");
+        btRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRegisterActionPerformed(evt);
+            }
+        });
+
+        lblStatus.setText("Status..");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,29 +171,44 @@ public class VLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(142, 142, 142)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSpotfei, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(60, 60, 60)
-                                    .addComponent(lblUsername))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(61, 61, 61)
-                                    .addComponent(lblPassword))
-                                .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                                .addComponent(txtUsername))
-                            .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                            .addComponent(txtUsername)
+                            .addComponent(lblSpotfei, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                            .addComponent(lblLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblRegister, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(btRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                        .addComponent(lblStatus))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(176, 176, 176)
-                        .addComponent(btSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(151, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(176, 176, 176)
+                                .addComponent(btSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(211, 211, 211)
+                                .addComponent(lblPassword))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(182, 182, 182)
+                                .addComponent(lblUsername)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(56, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblLogin)
+                        .addGap(36, 36, 36))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblStatus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(lblSpotfei, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addGap(41, 41, 41)
                 .addComponent(lblUsername)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -107,16 +219,24 @@ public class VLogin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMensagem)
-                .addGap(58, 58, 58))
+                .addComponent(lblRegister)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSubmitActionPerformed
-        // TODO add your handling code here:
+        c.tryLogin();
     }//GEN-LAST:event_btSubmitActionPerformed
+
+    private void btRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegisterActionPerformed
+        if(vR == null) vR = new VRegister(this);
+        vR.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btRegisterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,11 +273,15 @@ public class VLogin extends javax.swing.JFrame {
 //        });
 //    }
     private CLogin c;
+    VRegister vR;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btRegister;
     private javax.swing.JButton btSubmit;
-    private javax.swing.JLabel lblMensagem;
+    private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblRegister;
     private javax.swing.JLabel lblSpotfei;
+    private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUsername;

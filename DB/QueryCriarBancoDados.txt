@@ -1,0 +1,228 @@
+--Criando o banco de dados
+
+CREATE TABLE person (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    age INTEGER,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    pass VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE artist (
+    id INTEGER PRIMARY KEY REFERENCES person(id) ON DELETE CASCADE,
+    genre VARCHAR(50)
+);
+
+CREATE TABLE music(
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(50),
+	artistId INTEGER REFERENCES artist(id) ON DELETE SET NULL,
+	genre VARCHAR(50)
+);
+
+CREATE TABLE album(
+	id SERIAL PRIMARY KEY,
+	ownerId INTEGER NOT NULL REFERENCES person(id) ON DELETE CASCADE,
+	name VARCHAR(50)
+);
+
+CREATE TABLE albumMusic(
+	albumId INTEGER NOT NULL REFERENCES album(id) ON DELETE CASCADE,
+	musicId INTEGER NOT NULL REFERENCES music(id) ON DELETE CASCADE,
+	PRIMARY KEY (albumId, musicId)
+);
+
+
+CREATE TABLE, musicLike(
+	personId INTEGER NOT NULL REFERENCES person(id) ON DELETE CASCADE,
+	musicId INTEGER NOT NULL REFERENCES music(id) ON DELETE CASCADE,
+	likeType BOOLEAN,
+	PRIMARY KEY (personId, musicId)
+);
+
+CREATE TABLE history(
+	id SERIAL PRIMARY KEY,
+	personId INTEGER  REFERENCES person(id) ON DELETE CASCADE,
+	value VARCHAR(50)
+);
+
+--Views
+CREATE VIEW vAlbumMusic AS 
+SELECT
+	albumMusic.albumId as albumId,
+	albumMusic.musicId as musicId,
+	music.name as musicName,
+	music.artistId AS artistId,
+	music.genre AS musicGenre,
+	album.name as albumName
+FROM 
+	albumMusic
+	INNER JOIN music ON albumMusic.musicId = music.id
+	INNER JOIN album ON albumMusic.albumId = album.id;
+	
+	
+CREATE VIEW vPersonArtistMusic AS
+SELECT
+	person.id as id,
+	person.name as name,
+	person.age as age,
+	person.username as username,
+	person.pass as pass,
+	artist.genre as artistGenre,
+	music.id as musicId,
+	music.name as musicName,
+	music.genre as musicGenre
+FROM
+	person 
+	INNER JOIN artist ON artist.id = person.id
+	INNER JOIN music ON music.artistId = person.id;
+	
+CREATE VIEW vPersonHistory AS
+SELECT
+	person.id as personId,
+	person.name as name,
+	person.age as age,
+	person.username as username,
+	person.pass as pass,
+	history.id as historyId,
+	history.Value as value
+FROM
+	person
+	INNER JOIN history ON person.id = history.personId
+ORDER BY history.id DESC;
+
+CREATE VIEW vMusicPersonLike AS
+SELECT
+	person.id as id,
+	person.name as name,
+	person.age as age,
+	person.username as username,
+	person.pass as pass,
+	music.id as musicId,
+	music.artistId as artistId,
+	music.name as musicName,
+	music.genre as musicGenre,
+	musicLike.likeType as likeType
+FROM
+	music
+	INNER JOIN musicLike ON musicLike.musicId = music.id
+	INNER JOIN person ON musicLike.personId = person.id
+WHERE musicLike.likeType;
+	
+	
+CREATE VIEW vMusicPersonDeslike AS
+SELECT
+	person.id as id,
+	person.name as name,
+	person.age as age,
+	person.username as username,
+	person.pass as pass,
+	music.id as musicId,
+	music.name as musicName,
+	music.artistId as artistId,
+	music.genre as musicGenre,
+	musicLike.likeType as likeType
+FROM
+	music
+	INNER JOIN musicLike ON musicLike.musicId = music.id
+	INNER JOIN person ON musicLike.personId = person.id
+WHERE NOT musicLike.likeType;
+	
+	
+CREATE VIEW vMusicLikeQuantity AS
+SELECT
+	music.id as musicId,
+	music.name as musicName,
+	music.artistId as artistId,
+	music.genre as musicGenre,
+	COUNT(musicLike.personId) AS likeQuantity
+FROM
+	music
+	INNER JOIN musicLike ON musicLike.musicId = music.id
+WHERE 
+	musicLike.likeType
+GROUP BY
+	music.name,
+	music.id,
+	music.artistId,
+	music.genre
+ORDER BY likeQuantity DESC;
+
+
+CREATE VIEW vMusicDeslikeQuantity AS
+SELECT
+	music.id as musicId,
+	music.name as musicName,
+	music.artistId as artistId,
+	music.genre as musicGenre,
+	COUNT(musicLike.personId) AS deslikeQuantity
+FROM 
+	music
+	INNER JOIN musicLike ON musicLike.musicId = music.id
+WHERE NOT
+	musicLike.likeType
+GROUP BY
+	music.name,
+	music.id,
+	music.artistId,
+	music.genre
+ORDER BY deslikeQuantity DESC;
+
+CREATE VIEW vUser AS
+SELECT
+	*
+FROM	
+	person
+where
+	person.id NOT IN (
+	SELECT
+		artist.id
+	FROM
+		artist
+	);
+	
+CREATE VIEW vAlbumArtistPersonMusic AS
+SELECT
+	person.id AS id,
+    person.name AS name,
+    person.age AS age,
+    person.username AS username,
+    person.pass AS pass,
+	artist.genre AS artistGenre,
+	music.id AS musicId,
+	music.name AS musicName,
+	music.genre AS musicGenre,
+	album.id AS albumId,
+	album.name AS albumName
+FROM
+	person
+	INNER JOIN artist ON person.id = artist.id
+	INNER JOIN music ON music.artistId = artist.id
+	INNER JOIN album ON album.ownerId = artist.id; 
+
+
+
+--apagada
+CREATE VIEW vAlbumMusicLikeQuantity AS
+SELECT 
+	vMusicLikeQuantity.musicId AS musicId,
+	vMusicLikeQuantity.MusicName AS musicName,
+	vMusicLikeQuantity.artistId AS artistId,
+	vMusicLikeQuantity.musicGenre AS musicGenre,
+	vMusicLikeQuantity.likeQuantity AS likeQuantity,
+	vAlbumMusic.AlbumId AS albumId,
+	vAlbumMusic.albumName AS albumName
+FROM 
+	vMusicLikeQuantity INNER JOIN vAlbumMusic ON vAlbumMusic.musicId = vMusicLikeQuantity.musicId;
+--apagada
+CREATE VIEW vAlbumMusicDeslikeQuantity AS
+SELECT 
+	vMusicDeslikeQuantity.musicId AS musicId,
+	vMusicDeslikeQuantity.MusicName AS musicName,
+	vMusicDeslikeQuantity.artistId AS artistId,
+	vMusicDeslikeQuantity.musicGenre AS musicGenre,
+	vMusicDeslikeQuantity.likeQuantity AS likeQuantity,
+	vAlbumMusic.AlbumId AS albumId,
+	vAlbumMusic.albumName AS albumName
+FROM 
+	vMusicDeslikeQuantity INNER JOIN vAlbumMusic ON vAlbumMusic.musicId = vMusicDeslikeQuantity.musicId;

@@ -4,17 +4,174 @@
  */
 package View;
 
+import Controler.CSpotfei;
+import Model.User;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
 /**
  *
- * @author unifdloureiro
+ * @author pudim
  */
 public class VSpotfei extends javax.swing.JFrame {
 
     /**
      * Creates new form VSpotfei
+     * @param loggedUser
      */
-    public VSpotfei() {
+    public VSpotfei(User loggedUser) {
         initComponents();
+        this.loggedUser = loggedUser;
+        c = new CSpotfei(this, loggedUser);
+    }
+
+    public JButton getBtAdd() {
+        return btAdd;
+    }
+
+    public void setBtAdd(JButton btAdd) {
+        this.btAdd = btAdd;
+    }
+
+    public JButton getBtDeslike() {
+        return btDeslike;
+    }
+
+    public void setBtDeslike(JButton btDeslike) {
+        this.btDeslike = btDeslike;
+    }
+
+    public JButton getBtLike() {
+        return btLike;
+    }
+
+    public void setBtLike(JButton btLike) {
+        this.btLike = btLike;
+    }
+
+    public JButton getBtPlaylists() {
+        return btPlaylists;
+    }
+
+    public void setBtPlaylists(JButton btPlaylists) {
+        this.btPlaylists = btPlaylists;
+    }
+
+    public JButton getBtSearch() {
+        return btSearch;
+    }
+
+    public void setBtSearch(JButton btSearch) {
+        this.btSearch = btSearch;
+    }
+
+    public JLabel getLblFilter() {
+        return lblFilter;
+    }
+
+    public void setLblFilter(JLabel lblFilter) {
+        this.lblFilter = lblFilter;
+    }
+
+    public JLabel getLblMusicId() {
+        return lblMusicId;
+    }
+
+    public void setLblMusicId(JLabel lblMusicId) {
+        this.lblMusicId = lblMusicId;
+    }
+
+    public JLabel getLblMusicaIdLike() {
+        return lblMusicaIdLike;
+    }
+
+    public void setLblMusicaIdLike(JLabel lblMusicaIdLike) {
+        this.lblMusicaIdLike = lblMusicaIdLike;
+    }
+
+    public JLabel getLblPlaylistName() {
+        return lblPlaylistName;
+    }
+
+    public void setLblPlaylistName(JLabel lblPlaylistName) {
+        this.lblPlaylistName = lblPlaylistName;
+    }
+
+    public JLabel getLblSpotfei() {
+        return lblSpotfei;
+    }
+
+    public void setLblSpotfei(JLabel lblSpotfei) {
+        this.lblSpotfei = lblSpotfei;
+    }
+
+    public JScrollPane getSpInfo() {
+        return spInfo;
+    }
+
+    public void setSpInfo(JScrollPane spInfo) {
+        this.spInfo = spInfo;
+    }
+
+    public JScrollPane getSpMain() {
+        return spMain;
+    }
+
+    public void setSpMain(JScrollPane spMain) {
+        this.spMain = spMain;
+    }
+
+    public JTable gettMain() {
+        return tMain;
+    }
+
+    public void settMain(JTable tMain) {
+        this.tMain = tMain;
+    }
+
+    public JSpinner getsMusicIdLike() {
+        return sMusicIdLike;
+    }
+
+    public void setsMusicIdLike(JSpinner sMusicIdLike) {
+        this.sMusicIdLike = sMusicIdLike;
+    }
+
+    public JSpinner getsMusicIdPlaylist() {
+        return sMusicIdPlaylist;
+    }
+
+    public void setsMusicIdPlaylist(JSpinner sMusicIdPlaylist) {
+        this.sMusicIdPlaylist = sMusicIdPlaylist;
+    }
+
+    public JTextField getTxtPlaylistName() {
+        return txtPlaylistName;
+    }
+
+    public void setTxtPlaylistName(JTextField txtPlaylistName) {
+        this.txtPlaylistName = txtPlaylistName;
+    }
+
+    public JTextField getTxtSearch() {
+        return txtSearch;
+    }
+
+    public void setTxtSearch(JTextField txtSearch) {
+        this.txtSearch = txtSearch;
+    }
+
+    public JTextArea getTxtaInfo() {
+        return txtaInfo;
+    }
+
+    public void setTxtaInfo(JTextArea txtaInfo) {
+        this.txtaInfo = txtaInfo;
     }
 
     /**
@@ -26,21 +183,214 @@ public class VSpotfei extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtSearch = new javax.swing.JTextField();
+        lblFilter = new javax.swing.JLabel();
+        btSearch = new javax.swing.JButton();
+        lblSpotfei = new javax.swing.JLabel();
+        btPlaylists = new javax.swing.JButton();
+        spMain = new javax.swing.JScrollPane();
+        tMain = new javax.swing.JTable();
+        btLike = new javax.swing.JButton();
+        btDeslike = new javax.swing.JButton();
+        lblMusicaIdLike = new javax.swing.JLabel();
+        lblMusicId = new javax.swing.JLabel();
+        lblPlaylistName = new javax.swing.JLabel();
+        txtPlaylistName = new javax.swing.JTextField();
+        btAdd = new javax.swing.JButton();
+        spInfo = new javax.swing.JScrollPane();
+        txtaInfo = new javax.swing.JTextArea();
+        sMusicIdLike = new javax.swing.JSpinner();
+        sMusicIdPlaylist = new javax.swing.JSpinner();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        txtSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtSearchMouseEntered(evt);
+            }
+        });
+
+        lblFilter.setForeground(new java.awt.Color(153, 153, 153));
+        lblFilter.setText("Filtre por: artista, genero, ou nome.");
+
+        btSearch.setText("Procurar");
+        btSearch.setActionCommand("btSearch");
+        btSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSearchActionPerformed(evt);
+            }
+        });
+
+        lblSpotfei.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lblSpotfei.setText("Spotfei");
+
+        btPlaylists.setText("Playlists");
+        btPlaylists.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPlaylistsActionPerformed(evt);
+            }
+        });
+
+        tMain.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        spMain.setViewportView(tMain);
+
+        btLike.setText("Like");
+        btLike.setActionCommand("btSearch");
+        btLike.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLikeActionPerformed(evt);
+            }
+        });
+
+        btDeslike.setText("Deslike");
+        btDeslike.setActionCommand("btSearch");
+        btDeslike.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDeslikeActionPerformed(evt);
+            }
+        });
+
+        lblMusicaIdLike.setForeground(new java.awt.Color(153, 153, 153));
+        lblMusicaIdLike.setText("id da musica");
+
+        lblMusicId.setForeground(new java.awt.Color(153, 153, 153));
+        lblMusicId.setText("id da musica");
+
+        lblPlaylistName.setForeground(new java.awt.Color(153, 153, 153));
+        lblPlaylistName.setText("Nome da playlist");
+
+        btAdd.setText("Adicionar");
+        btAdd.setActionCommand("btSearch");
+        btAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAddActionPerformed(evt);
+            }
+        });
+
+        txtaInfo.setColumns(20);
+        txtaInfo.setRows(5);
+        spInfo.setViewportView(txtaInfo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(spMain)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFilter)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btSearch)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblSpotfei)
+                        .addGap(18, 18, 18)
+                        .addComponent(btPlaylists, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMusicaIdLike)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblMusicId)
+                                        .addComponent(sMusicIdPlaylist, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblPlaylistName)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(txtPlaylistName, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(btAdd))))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(sMusicIdLike)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btLike)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btDeslike))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(spInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblFilter)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btSearch)))
+                    .addComponent(lblSpotfei)
+                    .addComponent(btPlaylists, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(spMain, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblMusicaIdLike)
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btLike)
+                            .addComponent(btDeslike)
+                            .addComponent(sMusicIdLike))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMusicId)
+                            .addComponent(lblPlaylistName))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPlaylistName)
+                            .addComponent(btAdd)
+                            .addComponent(sMusicIdPlaylist)))
+                    .addComponent(spInfo))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void btPlaylistsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPlaylistsActionPerformed
+        if(vP == null) vP = new VPlaylists(this, loggedUser);
+        vP.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btPlaylistsActionPerformed
+
+    private void btLikeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLikeActionPerformed
+        c.likeMusic();
+    }//GEN-LAST:event_btLikeActionPerformed
+
+    private void btDeslikeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeslikeActionPerformed
+        c.deslikeMusic();
+    }//GEN-LAST:event_btDeslikeActionPerformed
+
+    private void btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddActionPerformed
+        c.addMusicAlbum();
+    }//GEN-LAST:event_btAddActionPerformed
+
+    private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
+        c.loadMusics();
+    }//GEN-LAST:event_btSearchActionPerformed
+
+    private void txtSearchMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseEntered
+        c.showSearchHistory();
+    }//GEN-LAST:event_txtSearchMouseEntered
 
     /**
      * @param args the command line arguments
@@ -76,7 +426,28 @@ public class VSpotfei extends javax.swing.JFrame {
 //            }
 //        });
 //    }
-
+    
+    VPlaylists vP;
+    User loggedUser;
+    CSpotfei c;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAdd;
+    private javax.swing.JButton btDeslike;
+    private javax.swing.JButton btLike;
+    private javax.swing.JButton btPlaylists;
+    private javax.swing.JButton btSearch;
+    private javax.swing.JLabel lblFilter;
+    private javax.swing.JLabel lblMusicId;
+    private javax.swing.JLabel lblMusicaIdLike;
+    private javax.swing.JLabel lblPlaylistName;
+    private javax.swing.JLabel lblSpotfei;
+    private javax.swing.JSpinner sMusicIdLike;
+    private javax.swing.JSpinner sMusicIdPlaylist;
+    private javax.swing.JScrollPane spInfo;
+    private javax.swing.JScrollPane spMain;
+    private javax.swing.JTable tMain;
+    private javax.swing.JTextField txtPlaylistName;
+    private javax.swing.JTextField txtSearch;
+    private javax.swing.JTextArea txtaInfo;
     // End of variables declaration//GEN-END:variables
 }
